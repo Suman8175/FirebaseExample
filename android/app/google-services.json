@@ -1,0 +1,30 @@
+{
+  "project_info": {
+    "project_number": "629344242908",
+    "firebase_url": "https://testoffirebaseauth-default-rtdb.asia-southeast1.firebasedatabase.app",
+    "project_id": "testoffirebaseauth",
+    "storage_bucket": "testoffirebaseauth.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:629344242908:android:87e9c8123f8984ab453819",
+        "android_client_info": {
+          "package_name": "com.example.firebaseauthexample"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB0VJqA6IQudiKL2FC4RqjwSTirNo3YKWg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
