@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_database/firebase_database.dart';
+import 'package:firebase_database/ui/firebase_animated_list.dart';
 import 'package:firebaseauthexample/exception/firebaseemailexcep.dart';
 import 'package:firebaseauthexample/ui/auth/login.dart';
 import 'package:firebaseauthexample/ui/button.dart';
@@ -16,6 +17,7 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   TextEditingController enteredDataController = TextEditingController();
   TextEditingController enteredData2Controller = TextEditingController();
+  TextEditingController searchController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -54,6 +56,47 @@ class _HomeScreenState extends State<HomeScreen> {
         padding: const EdgeInsets.symmetric(horizontal: 16),
         child: Column(
           children: [
+            Expanded(
+                child: FirebaseAnimatedList(
+                    query: databaseRef,
+                    itemBuilder: (context, snapshot, animation, index) {
+                      final title = snapshot.child('title1').value.toString();
+                      if (searchController.text.isEmpty) {
+                        return ListTile(
+                          title:
+                              Text(snapshot.child('title1').value.toString()),
+                          subtitle:
+                              Text(snapshot.child('title2').value.toString()),
+                        );
+                      } else if (title.toLowerCase().contains(
+                          searchController.text.toString().toLowerCase())) {
+                        return ListTile(
+                          title:
+                              Text(snapshot.child('title1').value.toString()),
+                          subtitle:
+                              Text(snapshot.child('title2').value.toString()),
+                        );
+                      } else {
+                        return Container();
+                      }
+                    })),
+            Container(
+              height: 5,
+              color: Colors.amber,
+            ),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 10),
+              child: TextFormField(
+                onChanged: (String value) {
+                  setState(() {});
+                },
+                controller: searchController,
+                decoration: const InputDecoration(hintText: 'Search'),
+              ),
+            ),
+            const SizedBox(
+              height: 10,
+            ),
             Flexible(
               child: TextFormField(
                 textInputAction: TextInputAction.next,
@@ -62,7 +105,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 controller: enteredDataController,
                 decoration: const InputDecoration(
                   prefixIcon: Icon(Icons.message_outlined),
-                  hintText: 'Enter the messages',
+                  hintText: 'Enter the message',
                   // floatingLabelBehavior: FloatingLabelBehavior.always,
                   alignLabelWithHint: true,
                 ),
