@@ -67,6 +67,25 @@ class _HomeScreenState extends State<HomeScreen> {
                               Text(snapshot.child('title1').value.toString()),
                           subtitle:
                               Text(snapshot.child('title2').value.toString()),
+                          trailing: PopupMenuButton(
+                            icon: const Icon(Icons.more_vert),
+                            itemBuilder: (context) => [
+                              const PopupMenuItem(
+                                value: 1,
+                                child: ListTile(
+                                  leading: Icon(Icons.add),
+                                  title: Text('Add'),
+                                ),
+                              ),
+                              const PopupMenuItem(
+                                value: 2,
+                                child: ListTile(
+                                  leading: Icon(Icons.delete),
+                                  title: Text('Delete'),
+                                ),
+                              )
+                            ],
+                          ),
                         );
                       } else if (title.toLowerCase().contains(
                           searchController.text.toString().toLowerCase())) {
@@ -138,7 +157,8 @@ class _HomeScreenState extends State<HomeScreen> {
                     });
                     databaseRef.child(_auth.currentUser!.uid).set({
                       'title1': enteredDataController.text.toString(),
-                      'title2': enteredData2Controller.text.toString()
+                      'title2': enteredData2Controller.text.toString(),
+                      'id': _auth.currentUser!.uid
                     });
                     ExceptionFromFirebase()
                         .firebaseemailEception('Added item in database');
