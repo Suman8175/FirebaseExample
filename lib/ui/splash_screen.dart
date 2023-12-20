@@ -21,7 +21,7 @@ class _SplashScreenState extends State<SplashScreen> {
   Widget build(BuildContext context) {
     return const Scaffold(
       body: Center(
-        child: Text('Firebase'),
+        child: Text('Firebase example of this'),
       ),
     );
   }
